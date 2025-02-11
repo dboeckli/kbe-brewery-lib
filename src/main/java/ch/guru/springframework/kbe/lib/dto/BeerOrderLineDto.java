@@ -55,7 +55,8 @@ public class BeerOrderLineDto {
 
     private String upc;
     private String beerName;
-    private String beerStyle;
+    
+    private BeerStyleEnum beerStyle;
 
     @NotNull
     @Positive

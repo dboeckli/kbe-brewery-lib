@@ -10,9 +10,7 @@ import lombok.NoArgsConstructor;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-/**
- * Created by jt on 3/7/20.
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

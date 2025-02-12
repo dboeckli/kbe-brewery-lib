@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class NewInventoryEvent extends BeerEvent implements Serializable {
 
     @Serial
-    static final long serialVersionUID = -1761313326070018802L;
+    private static final long serialVersionUID = -1761313326070018802L;
 
     public NewInventoryEvent(BeerDto beerDto) {
         super(beerDto);

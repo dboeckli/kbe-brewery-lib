@@ -13,16 +13,18 @@ class BeerDtoTest {
     @Test
     void testNoArgsConstructor() {
         BeerDto beerDto = new BeerDto();
-        
-        assertNull(beerDto.getId());
-        assertNull(beerDto.getVersion());
-        assertNull(beerDto.getCreatedDate());
-        assertNull(beerDto.getLastModifiedDate());
-        assertNull(beerDto.getBeerName());
-        assertNull(beerDto.getBeerStyle());
-        assertNull(beerDto.getUpc());
-        assertNull(beerDto.getQuantityOnHand());
-        assertNull(beerDto.getPrice());
+
+        assertAll(
+            () -> assertNull(beerDto.getId()),
+            () -> assertNull(beerDto.getVersion()),
+            () -> assertNull(beerDto.getCreatedDate()),
+            () -> assertNull(beerDto.getLastModifiedDate()),
+            () -> assertNull(beerDto.getBeerName()),
+            () -> assertNull(beerDto.getBeerStyle()),
+            () -> assertNull(beerDto.getUpc()),
+            () -> assertNull(beerDto.getQuantityOnHand()),
+            () -> assertNull(beerDto.getPrice())
+        );
     }
 
     @Test
@@ -39,16 +41,18 @@ class BeerDtoTest {
 
         BeerDto beerDto = new BeerDto(id, version, createdDate, lastModifiedDate, 
                                       beerName, beerStyle, upc, quantityOnHand, price);
-        
-        assertEquals(id, beerDto.getId());
-        assertEquals(version, beerDto.getVersion());
-        assertEquals(createdDate, beerDto.getCreatedDate());
-        assertEquals(lastModifiedDate, beerDto.getLastModifiedDate());
-        assertEquals(beerName, beerDto.getBeerName());
-        assertEquals(beerStyle, beerDto.getBeerStyle());
-        assertEquals(upc, beerDto.getUpc());
-        assertEquals(quantityOnHand, beerDto.getQuantityOnHand());
-        assertEquals(price, beerDto.getPrice());
+
+        assertAll(
+            () -> assertEquals(id, beerDto.getId()),
+            () -> assertEquals(version, beerDto.getVersion()),
+            () -> assertEquals(createdDate, beerDto.getCreatedDate()),
+            () -> assertEquals(lastModifiedDate, beerDto.getLastModifiedDate()),
+            () -> assertEquals(beerName, beerDto.getBeerName()),
+            () -> assertEquals(beerStyle, beerDto.getBeerStyle()),
+            () -> assertEquals(upc, beerDto.getUpc()),
+            () -> assertEquals(quantityOnHand, beerDto.getQuantityOnHand()),
+            () -> assertEquals(price, beerDto.getPrice())
+        );
     }
 
     @Test
@@ -74,54 +78,56 @@ class BeerDtoTest {
                 .quantityOnHand(quantityOnHand)
                 .price(price)
                 .build();
-        
-        assertEquals(id, beerDto.getId());
-        assertEquals(version, beerDto.getVersion());
-        assertEquals(createdDate, beerDto.getCreatedDate());
-        assertEquals(lastModifiedDate, beerDto.getLastModifiedDate());
-        assertEquals(beerName, beerDto.getBeerName());
-        assertEquals(beerStyle, beerDto.getBeerStyle());
-        assertEquals(upc, beerDto.getUpc());
-        assertEquals(quantityOnHand, beerDto.getQuantityOnHand());
-        assertEquals(price, beerDto.getPrice());
+
+        assertAll(
+            () -> assertEquals(id, beerDto.getId()),
+            () -> assertEquals(version, beerDto.getVersion()),
+            () -> assertEquals(createdDate, beerDto.getCreatedDate()),
+            () -> assertEquals(lastModifiedDate, beerDto.getLastModifiedDate()),
+            () -> assertEquals(beerName, beerDto.getBeerName()),
+            () -> assertEquals(beerStyle, beerDto.getBeerStyle()),
+            () -> assertEquals(upc, beerDto.getUpc()),
+            () -> assertEquals(quantityOnHand, beerDto.getQuantityOnHand()),
+            () -> assertEquals(price, beerDto.getPrice())
+        );
     }
 
     @Test
     void testGettersAndSetters() {
         BeerDto beerDto = new BeerDto();
-        
+
         UUID id = UUID.randomUUID();
         beerDto.setId(id);
         assertEquals(id, beerDto.getId());
-        
+
         Integer version = 1;
         beerDto.setVersion(version);
         assertEquals(version, beerDto.getVersion());
-        
+
         OffsetDateTime createdDate = OffsetDateTime.now();
         beerDto.setCreatedDate(createdDate);
         assertEquals(createdDate, beerDto.getCreatedDate());
-        
+
         OffsetDateTime lastModifiedDate = OffsetDateTime.now();
         beerDto.setLastModifiedDate(lastModifiedDate);
         assertEquals(lastModifiedDate, beerDto.getLastModifiedDate());
-        
+
         String beerName = "Test Beer";
         beerDto.setBeerName(beerName);
         assertEquals(beerName, beerDto.getBeerName());
-        
+
         BeerStyleEnum beerStyle = BeerStyleEnum.ALE;
         beerDto.setBeerStyle(beerStyle);
         assertEquals(beerStyle, beerDto.getBeerStyle());
-        
+
         String upc = "12345";
         beerDto.setUpc(upc);
         assertEquals(upc, beerDto.getUpc());
-        
+
         Integer quantityOnHand = 10;
         beerDto.setQuantityOnHand(quantityOnHand);
         assertEquals(quantityOnHand, beerDto.getQuantityOnHand());
-        
+
         BigDecimal price = new BigDecimal("10.99");
         beerDto.setPrice(price);
         assertEquals(price, beerDto.getPrice());
@@ -137,7 +143,7 @@ class BeerDtoTest {
                 .upc("12345")
                 .price(new BigDecimal("10.99"))
                 .build();
-        
+
         BeerDto beerDto2 = BeerDto.builder()
                 .id(id)
                 .beerName("Test Beer")
@@ -145,10 +151,12 @@ class BeerDtoTest {
                 .upc("12345")
                 .price(new BigDecimal("10.99"))
                 .build();
-        
-        assertEquals(beerDto1, beerDto2);
-        assertEquals(beerDto1.hashCode(), beerDto2.hashCode());
-        
+
+        assertAll(
+            () -> assertEquals(beerDto1, beerDto2),
+            () -> assertEquals(beerDto1.hashCode(), beerDto2.hashCode())
+        );
+
         // Change a property to verify equals works correctly
         beerDto2.setBeerName("Different Beer");
         assertNotEquals(beerDto1, beerDto2);

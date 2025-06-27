@@ -7,72 +7,76 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BeerInventoryDtoTest {
+class CustomerDtoTest {
 
     @Test
     void testNoArgsConstructor() {
-        BeerInventoryDto dto = new BeerInventoryDto();
+        CustomerDto dto = new CustomerDto();
 
         assertAll(
             () -> assertNull(dto.getId()),
+            () -> assertNull(dto.getVersion()),
             () -> assertNull(dto.getCreatedDate()),
             () -> assertNull(dto.getLastModifiedDate()),
-            () -> assertNull(dto.getBeerId()),
-            () -> assertNull(dto.getQuantityOnHand())
+            () -> assertNull(dto.getCustomerName())
         );
     }
 
     @Test
     void testAllArgsConstructor() {
         UUID id = UUID.randomUUID();
+        Long version = 1L;
         OffsetDateTime createdDate = OffsetDateTime.now();
         OffsetDateTime lastModifiedDate = OffsetDateTime.now();
-        UUID beerId = UUID.randomUUID();
-        Integer quantityOnHand = 10;
+        String customerName = "Test Customer";
 
-        BeerInventoryDto dto = new BeerInventoryDto(id, createdDate, lastModifiedDate, beerId, quantityOnHand);
+        CustomerDto dto = new CustomerDto(id, version, createdDate, lastModifiedDate, customerName);
 
         assertAll(
             () -> assertEquals(id, dto.getId()),
+            () -> assertEquals(version, dto.getVersion()),
             () -> assertEquals(createdDate, dto.getCreatedDate()),
             () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
-            () -> assertEquals(beerId, dto.getBeerId()),
-            () -> assertEquals(quantityOnHand, dto.getQuantityOnHand())
+            () -> assertEquals(customerName, dto.getCustomerName())
         );
     }
 
     @Test
     void testBuilder() {
         UUID id = UUID.randomUUID();
+        Long version = 1L;
         OffsetDateTime createdDate = OffsetDateTime.now();
         OffsetDateTime lastModifiedDate = OffsetDateTime.now();
-        UUID beerId = UUID.randomUUID();
-        Integer quantityOnHand = 10;
+        String customerName = "Test Customer";
 
-        BeerInventoryDto dto = BeerInventoryDto.builder()
+        CustomerDto dto = CustomerDto.builder()
                 .id(id)
+                .version(version)
                 .createdDate(createdDate)
                 .lastModifiedDate(lastModifiedDate)
-                .beerId(beerId)
-                .quantityOnHand(quantityOnHand)
+                .customerName(customerName)
                 .build();
 
         assertAll(
             () -> assertEquals(id, dto.getId()),
+            () -> assertEquals(version, dto.getVersion()),
             () -> assertEquals(createdDate, dto.getCreatedDate()),
             () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
-            () -> assertEquals(beerId, dto.getBeerId()),
-            () -> assertEquals(quantityOnHand, dto.getQuantityOnHand())
+            () -> assertEquals(customerName, dto.getCustomerName())
         );
     }
 
     @Test
     void testGettersAndSetters() {
-        BeerInventoryDto dto = new BeerInventoryDto();
+        CustomerDto dto = new CustomerDto();
 
         UUID id = UUID.randomUUID();
         dto.setId(id);
         assertEquals(id, dto.getId());
+
+        Long version = 1L;
+        dto.setVersion(version);
+        assertEquals(version, dto.getVersion());
 
         OffsetDateTime createdDate = OffsetDateTime.now();
         dto.setCreatedDate(createdDate);
@@ -82,30 +86,23 @@ class BeerInventoryDtoTest {
         dto.setLastModifiedDate(lastModifiedDate);
         assertEquals(lastModifiedDate, dto.getLastModifiedDate());
 
-        UUID beerId = UUID.randomUUID();
-        dto.setBeerId(beerId);
-        assertEquals(beerId, dto.getBeerId());
-
-        Integer quantityOnHand = 10;
-        dto.setQuantityOnHand(quantityOnHand);
-        assertEquals(quantityOnHand, dto.getQuantityOnHand());
+        String customerName = "Test Customer";
+        dto.setCustomerName(customerName);
+        assertEquals(customerName, dto.getCustomerName());
     }
 
     @Test
     void testEqualsAndHashCode() {
         UUID id = UUID.randomUUID();
-        UUID beerId = UUID.randomUUID();
-
-        BeerInventoryDto dto1 = BeerInventoryDto.builder()
+        
+        CustomerDto dto1 = CustomerDto.builder()
                 .id(id)
-                .beerId(beerId)
-                .quantityOnHand(10)
+                .customerName("Test Customer")
                 .build();
 
-        BeerInventoryDto dto2 = BeerInventoryDto.builder()
+        CustomerDto dto2 = CustomerDto.builder()
                 .id(id)
-                .beerId(beerId)
-                .quantityOnHand(10)
+                .customerName("Test Customer")
                 .build();
 
         assertAll(
@@ -114,7 +111,7 @@ class BeerInventoryDtoTest {
         );
 
         // Change a property to verify equals works correctly
-        dto2.setQuantityOnHand(20);
+        dto2.setCustomerName("Different Customer");
         assertNotEquals(dto1, dto2);
     }
 }

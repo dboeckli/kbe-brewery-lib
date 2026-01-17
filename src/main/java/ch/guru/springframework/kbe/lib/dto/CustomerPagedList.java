@@ -33,6 +33,6 @@ public class CustomerPagedList extends PageImpl<CustomerDto> {
     }
 
     public CustomerPagedList(List<CustomerDto> content) {
-        super(content);
+        super(content, PageRequest.of(0, content.isEmpty() ? 1 : content.size()), content.size());
     }
 }

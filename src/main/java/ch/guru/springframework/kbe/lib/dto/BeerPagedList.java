@@ -29,17 +29,19 @@ import java.util.List;
 public class BeerPagedList extends PageImpl<BeerDto> {
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public BeerPagedList(@JsonProperty("content") List<BeerDto> content,
-                         @JsonProperty("number") int number,
-                         @JsonProperty("size") int size,
+                         @JsonProperty("number") Integer number,
+                         @JsonProperty("size") Integer size,
                          @JsonProperty("totalElements") Long totalElements,
                          @JsonProperty("pageable") JsonNode pageable,
-                         @JsonProperty("last") boolean last,
-                         @JsonProperty("totalPages") int totalPages,
+                         @JsonProperty("last") Boolean last,
+                         @JsonProperty("totalPages") Integer totalPages,
                          @JsonProperty("sort") JsonNode sort,
-                         @JsonProperty("first") boolean first,
-                         @JsonProperty("numberOfElements") int numberOfElements) {
+                         @JsonProperty("first") Boolean first,
+                         @JsonProperty("numberOfElements") Integer numberOfElements) {
 
-        super(content, PageRequest.of(number, size), totalElements);
+        super(content,
+            PageRequest.of(number != null ? number : 0, size != null ? size : 25),
+            totalElements != null ? totalElements : 0L);
     }
 
     public BeerPagedList(List<BeerDto> content, Pageable pageable, long total) {

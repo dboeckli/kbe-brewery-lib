@@ -11,7 +11,7 @@
     <!-- artifacId should be lowercase to be able to push to github packages -->
     <groupId>ch.dboeckli.springframeworkguru.kbe.lib</groupId>
     <artifactId>kbe-brewery-lib</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.6-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <name>${project.artifactId}</name>

@@ -74,7 +74,20 @@
         }
     ],
     "ignoreDeps": [
-        "maven"
+    ],
+    "regexManagers": [
+        {
+            "fileMatch": ["^pom\\.xml$"],
+            "matchStrings": ["<java\\.version>(?<currentValue>\\d+)</java\\.version>"],
+            "datasourceTemplate": "java-version",
+            "depNameTemplate": "java"
+        },
+        {
+            "fileMatch": ["^\\.github/workflows/maven-build\\.yml$"],
+            "matchStrings": ["JAVA_VERSION:\\s*(?<currentValue>\\d+)"],
+            "datasourceTemplate": "java-version",
+            "depNameTemplate": "java"
+        }
     ],
     "schedule": [
         "before 5am"

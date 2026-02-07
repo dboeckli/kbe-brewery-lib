@@ -95,18 +95,18 @@
             "datasourceTemplate": "custom.custom_java",
             "depNameTemplate": "java",
             "packageNameTemplate": "",
-            "fileMatch": [
-                "(^|/)pom\\.xml$"
+            "managerFilePatterns": [
+                "/(^|/)pom\\.xml$/"
             ],
             "matchStrings": [
-                "<java.version>(?<currentValue>[0-9]+)<\/java.version>"
+                "<java.version>(?<currentValue>[0-9]+)</java.version>"
             ]
         },
         {
             "description": "Parse and change JAVA_VERSION in GitHub workflows",
             "customType": "regex",
-            "fileMatch": [
-                "^\\.github/workflows/(release|maven-build)\\.ya?ml$"
+            "managerFilePatterns": [
+                "/^\\.github/workflows/(release|maven-build)\\.ya?ml$/"
             ],
             "matchStrings": [
                 "(?<prefix>\\s*JAVA_VERSION:\\s*)(?<currentValue>\\d+)"

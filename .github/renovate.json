@@ -7,6 +7,15 @@
     "ignorePresets": [
         "workarounds:javaLTSVersions"
     ],
+    "customDatasources": {
+        "custom_java": {
+            "defaultRegistryUrlTemplate": "https://api.adoptium.net/v3/info/available_releases",
+            "format": "json",
+            "transformTemplates": [
+                "{ \"releases\": $map(available_lts_releases, function($v) { { \"version\": $string($v) } }) }"
+            ]
+        }
+    },
     "enabledManagers": [
         "maven",
         "maven-wrapper",
@@ -80,6 +89,19 @@
     ],
     "ignoreDeps": [],
     "customManagers": [
+        {
+            "description": "Parse and change the java version form pom.xml",
+            "customType": "regex",
+            "datasourceTemplate": "custom.custom_java",
+            "depNameTemplate": "java",
+            "packageNameTemplate": "",
+            "fileMatch": [
+                "(^|/)pom\\.xml$"
+            ],
+            "matchStrings": [
+                "<java.version>(?<currentValue>[0-9]+)<\/java.version>"
+            ]
+        },
         {
             "customType": "regex",
             "managerFilePatterns": [

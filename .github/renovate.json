@@ -94,14 +94,13 @@
             "customType": "regex",
             "datasourceTemplate": "custom.custom_java",
             "depNameTemplate": "java",
-            "packageNameTemplate": "",
             "managerFilePatterns": [
                 "/(^|/)pom\\.xml$/"
             ],
             "matchStrings": [
                 "<java.version>(?<currentValue>[0-9]+)</java.version>"
             ],
-            "autoReplaceStringTemplate": "<java.version>{{{newMajor}}}</java.version>"
+            "autoReplaceStringTemplate": "<java.version>{{{newValue}}}</java.version>"
         },
         {
             "description": "Parse and change JAVA_VERSION in GitHub workflows",
@@ -114,7 +113,7 @@
             "matchStrings": [
                 "(?<lineStart>^|\\r?\\n)(?<prefix>[\\t ]*JAVA_VERSION:[\\t ]*)(?<currentValue>\\d+)"
             ],
-            "autoReplaceStringTemplate": "{{{lineStart}}}{{{prefix}}}{{{newMajor}}}"
+            "autoReplaceStringTemplate": "{{{lineStart}}}{{{prefix}}}{{{newValue}}}"
         }
     ],
     "schedule": [

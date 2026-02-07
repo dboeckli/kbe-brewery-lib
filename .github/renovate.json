@@ -100,7 +100,8 @@
             ],
             "matchStrings": [
                 "<java.version>(?<currentValue>[0-9]+)</java.version>"
-            ]
+            ],
+            "autoReplaceStringTemplate": "<java.version>{{{newMajor}}}</java.version>"
         },
         {
             "description": "Parse and change JAVA_VERSION in GitHub workflows",
@@ -108,12 +109,12 @@
             "managerFilePatterns": [
                 "/^\\.github/workflows/(release|maven-build)\\.ya?ml$/"
             ],
+            "datasourceTemplate": "custom.custom_java",
+            "depNameTemplate": "java",
             "matchStrings": [
                 "(?<lineStart>^|\\r?\\n)(?<prefix>[\\t ]*JAVA_VERSION:[\\t ]*)(?<currentValue>\\d+)"
             ],
-            "datasourceTemplate": "custom.custom_java",
-            "depNameTemplate": "java",
-            "autoReplaceStringTemplate": "{{{prefix}}}{{{newMajor}}}"
+            "autoReplaceStringTemplate": "{{{lineStart}}}{{{prefix}}}{{{newMajor}}}"
         }
     ],
     "schedule": [

@@ -111,9 +111,8 @@
             "matchStrings": [
                 "(?<prefix>\\s*JAVA_VERSION:\\s*)(?<currentValue>\\d+)"
             ],
-            "datasourceTemplate": "java-version",
+            "datasourceTemplate": "custom.custom_java",
             "depNameTemplate": "java",
-            "versioningTemplate": "loose",
             "autoReplaceStringTemplate": "{{{prefix}}}{{{newMajor}}}"
         }
     ],

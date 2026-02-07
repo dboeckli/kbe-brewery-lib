@@ -90,26 +90,26 @@
     "ignoreDeps": [],
     "customManagers": [
         {
-            "description": "Parse and change the java version form pom.xml",
+            "description": "Parse and change the java version from pom.xml",
             "customType": "regex",
             "datasourceTemplate": "custom.custom_java",
             "depNameTemplate": "java",
             "managerFilePatterns": [
-                "/(^|/)pom\\.xml$/"
+                "/(^|\\/)pom\\.xml$/"
             ],
             "matchStrings": [
-                "<java.version>(?<currentValue>[0-9]+)</java.version>"
+                "<java\\.version>(?<currentValue>\\d+)</java.version>"
             ],
             "autoReplaceStringTemplate": "<java.version>{{{newValue}}}</java.version>"
         },
         {
             "description": "Parse and change JAVA_VERSION in GitHub workflows",
             "customType": "regex",
-            "managerFilePatterns": [
-                "/^\\.github/workflows/(release|maven-build)\\.ya?ml$/"
-            ],
             "datasourceTemplate": "custom.custom_java",
             "depNameTemplate": "java",
+            "managerFilePatterns": [
+                "/^\\.github\\/workflows\\/(release|maven-build)\\.ya?ml$/"
+            ],
             "matchStrings": [
                 "(?<lineStart>^|\\r?\\n)(?<prefix>[\\t ]*JAVA_VERSION:[\\t ]*)(?<currentValue>\\d+)"
             ],

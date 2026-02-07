@@ -5,11 +5,13 @@
         "config:recommended"
     ],
     "enabledManagers": [
-        "docker-compose",
+        "maven",
         "maven-wrapper",
+        "docker-compose",
         "kubernetes",
         "helm-values",
-        "helmv3"
+        "helmv3",
+        "custom.regex"
     ],
     "maven-wrapper": {
         "managerFilePatterns": [
@@ -75,18 +77,29 @@
     ],
     "ignoreDeps": [
     ],
-    "regexManagers": [
+    "customManagers": [
         {
-            "fileMatch": ["^pom\\.xml$"],
+            "customType": "regex",
+            "managerFilePatterns": ["(^|/)pom\\.xml$"],
             "matchStrings": ["<java\\.version>(?<currentValue>\\d+)</java\\.version>"],
             "datasourceTemplate": "java-version",
-            "depNameTemplate": "java"
+            "packageNameTemplate": "java-jdk",
+            "depNameTemplate": "java",
+            "versioningTemplate": "loose",
+            "allowedVersions": "/^\\d+$/"
         },
         {
-            "fileMatch": ["^\\.github/workflows/maven-build\\.yml$"],
-            "matchStrings": ["JAVA_VERSION:\\s*(?<currentValue>\\d+)"],
+            "customType": "regex",
+            "managerFilePatterns": [
+                "^\\.github/workflows/(maven-build|release)\\.ya?ml$"
+            ],
+            "matchStrings": [
+                "JAVA_VERSION:\\s*(?<currentValue>\\d+)"
+            ],
             "datasourceTemplate": "java-version",
-            "depNameTemplate": "java"
+            "depNameTemplate": "java",
+            "versioningTemplate": "loose",
+            "allowedVersions": "/^\\d+$/"
         }
     ],
     "schedule": [

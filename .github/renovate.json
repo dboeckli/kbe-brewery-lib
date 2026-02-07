@@ -98,7 +98,7 @@
                 "/(^|\\/)pom\\.xml$/"
             ],
             "matchStrings": [
-                "<java\\.version>(?<currentValue>\\d+)</java.version>"
+                "<java\\.version>(?<currentValue>\\d+)</java\\.version>"
             ],
             "autoReplaceStringTemplate": "<java.version>{{{newValue}}}</java.version>"
         },

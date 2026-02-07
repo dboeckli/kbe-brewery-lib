@@ -81,25 +81,26 @@
         {
             "customType": "regex",
             "managerFilePatterns": ["(^|/)pom\\.xml$"],
-            "matchStrings": ["<java\\.version>(?<currentValue>\\d+)</java\\.version>"],
+            "matchStrings": [
+                "<java\\.version>(?<currentValue>\\d+)</java\\.version>"
+            ],
             "datasourceTemplate": "java-version",
-            "packageNameTemplate": "java-jdk",
             "depNameTemplate": "java",
             "versioningTemplate": "loose",
-            "allowedVersions": "/^\\d+$/"
+            "autoReplaceStringTemplate": "<java.version>{{{newMajor}}}</java.version>"
         },
         {
             "customType": "regex",
             "managerFilePatterns": [
-                "^\\.github/workflows/(maven-build|release)\\.ya?ml$"
+                "^\\.github/workflows/(release|maven-build)\\.ya?ml$"
             ],
             "matchStrings": [
-                "JAVA_VERSION:\\s*(?<currentValue>\\d+)"
+                "(?<prefix>\\s*JAVA_VERSION:\\s*)(?<currentValue>\\d+)"
             ],
             "datasourceTemplate": "java-version",
             "depNameTemplate": "java",
             "versioningTemplate": "loose",
-            "allowedVersions": "/^\\d+$/"
+            "autoReplaceStringTemplate": "{{{prefix}}}{{{newMajor}}}"
         }
     ],
     "schedule": [

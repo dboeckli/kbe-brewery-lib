@@ -75,12 +75,13 @@
             "ignoreTests": true
         }
     ],
-    "ignoreDeps": [
-    ],
+    "ignoreDeps": [],
     "customManagers": [
         {
             "customType": "regex",
-            "managerFilePatterns": ["(^|/)pom\\.xml$"],
+            "managerFilePatterns": [
+                "(^|/)pom\\.xml$"
+            ],
             "matchStrings": [
                 "<java\\.version>(?<currentValue>\\d+)</java\\.version>"
             ],
@@ -110,7 +111,7 @@
     "dependencyDashboard": true,
     "prHourlyLimit": 0,
     "prConcurrentLimit": 0,
-    "baseBranches": [
+    "baseBranchPatterns": [
         "master"
     ],
     "branchPrefix": "feature/renovate-",

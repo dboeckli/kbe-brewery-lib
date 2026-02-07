@@ -109,7 +109,7 @@
                 "/^\\.github/workflows/(release|maven-build)\\.ya?ml$/"
             ],
             "matchStrings": [
-                "(?<prefix>\\s*JAVA_VERSION:\\s*)(?<currentValue>\\d+)"
+                "(?<lineStart>^|\\r?\\n)(?<prefix>[\\t ]*JAVA_VERSION:[\\t ]*)(?<currentValue>\\d+)"
             ],
             "datasourceTemplate": "custom.custom_java",
             "depNameTemplate": "java",

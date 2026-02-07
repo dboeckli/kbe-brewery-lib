@@ -4,6 +4,9 @@
         "mergeConfidence:all-badges",
         "config:recommended"
     ],
+    "ignorePresets": [
+        "workarounds:javaLTSVersions"
+    ],
     "enabledManagers": [
         "maven",
         "maven-wrapper",

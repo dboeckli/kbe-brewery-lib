@@ -110,9 +110,9 @@
                 "/^\\.github\\/workflows\\/(release|maven-build)\\.ya?ml$/"
             ],
             "matchStrings": [
-                "(?<prefix>[\\t ]*JAVA_VERSION:[\\t ]*)(?<currentValue>\\d+)"
+                "  JAVA_VERSION:[\\t ]*(?<currentValue>\\d+)"
             ],
-            "autoReplaceStringTemplate": "{{{prefix}}}{{{newValue}}}"
+            "autoReplaceStringTemplate": "  JAVA_VERSION: {{{newValue}}}"
         }
     ],
     "platformAutomerge": false,

@@ -87,7 +87,6 @@
             "ignoreTests": true
         }
     ],
-    "ignoreDeps": [],
     "customManagers": [
         {
             "description": "Parse and change the java version from pom.xml",
@@ -111,20 +110,18 @@
                 "/^\\.github\\/workflows\\/(release|maven-build)\\.ya?ml$/"
             ],
             "matchStrings": [
-                "(?<lineStart>^|\\r?\\n)(?<prefix>[\\t ]*JAVA_VERSION:[\\t ]*)(?<currentValue>\\d+)"
+                "(?<prefix>[\\t ]*JAVA_VERSION:[\\t ]*)(?<currentValue>\\d+)"
             ],
-            "autoReplaceStringTemplate": "{{{lineStart}}}{{{prefix}}}{{{newValue}}}"
+            "autoReplaceStringTemplate": "{{{prefix}}}{{{newValue}}}"
         }
-    ],
-    "schedule": [
-        "before 5am"
     ],
     "platformAutomerge": false,
     "dependencyDashboard": true,
     "prHourlyLimit": 0,
     "prConcurrentLimit": 0,
     "baseBranchPatterns": [
-        "master"
+        "master",
+        "main"
     ],
     "branchPrefix": "feature/renovate-",
     "separateMinorPatch": true,

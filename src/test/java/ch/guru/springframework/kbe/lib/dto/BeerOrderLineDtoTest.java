@@ -14,19 +14,11 @@ class BeerOrderLineDtoTest {
     void testNoArgsConstructor() {
         BeerOrderLineDto dto = new BeerOrderLineDto();
 
-        assertAll(
-            () -> assertNull(dto.getId()),
-            () -> assertNull(dto.getVersion()),
-            () -> assertNull(dto.getCreatedDate()),
-            () -> assertNull(dto.getLastModifiedDate()),
-            () -> assertNull(dto.getBeerId()),
-            () -> assertNull(dto.getUpc()),
-            () -> assertNull(dto.getBeerName()),
-            () -> assertNull(dto.getBeerStyle()),
-            () -> assertNull(dto.getOrderQuantity()),
-            () -> assertNull(dto.getQuantityAllocated()),
-            () -> assertNull(dto.getPrice())
-        );
+        assertAll(() -> assertNull(dto.getId()), () -> assertNull(dto.getVersion()),
+                () -> assertNull(dto.getCreatedDate()), () -> assertNull(dto.getLastModifiedDate()),
+                () -> assertNull(dto.getBeerId()), () -> assertNull(dto.getUpc()), () -> assertNull(dto.getBeerName()),
+                () -> assertNull(dto.getBeerStyle()), () -> assertNull(dto.getOrderQuantity()),
+                () -> assertNull(dto.getQuantityAllocated()), () -> assertNull(dto.getPrice()));
     }
 
     @Test
@@ -43,23 +35,17 @@ class BeerOrderLineDtoTest {
         Integer quantityAllocated = 5;
         BigDecimal price = new BigDecimal("10.99");
 
-        BeerOrderLineDto dto = new BeerOrderLineDto(id, version, createdDate, lastModifiedDate, 
-                                                  beerId, upc, beerName, beerStyle, 
-                                                  orderQuantity, quantityAllocated, price);
+        BeerOrderLineDto dto = new BeerOrderLineDto(id, version, createdDate, lastModifiedDate, beerId, upc, beerName,
+                beerStyle, orderQuantity, quantityAllocated, price);
 
-        assertAll(
-            () -> assertEquals(id, dto.getId()),
-            () -> assertEquals(version, dto.getVersion()),
-            () -> assertEquals(createdDate, dto.getCreatedDate()),
-            () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
-            () -> assertEquals(beerId, dto.getBeerId()),
-            () -> assertEquals(upc, dto.getUpc()),
-            () -> assertEquals(beerName, dto.getBeerName()),
-            () -> assertEquals(beerStyle, dto.getBeerStyle()),
-            () -> assertEquals(orderQuantity, dto.getOrderQuantity()),
-            () -> assertEquals(quantityAllocated, dto.getQuantityAllocated()),
-            () -> assertEquals(price, dto.getPrice())
-        );
+        assertAll(() -> assertEquals(id, dto.getId()), () -> assertEquals(version, dto.getVersion()),
+                () -> assertEquals(createdDate, dto.getCreatedDate()),
+                () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
+                () -> assertEquals(beerId, dto.getBeerId()), () -> assertEquals(upc, dto.getUpc()),
+                () -> assertEquals(beerName, dto.getBeerName()), () -> assertEquals(beerStyle, dto.getBeerStyle()),
+                () -> assertEquals(orderQuantity, dto.getOrderQuantity()),
+                () -> assertEquals(quantityAllocated, dto.getQuantityAllocated()),
+                () -> assertEquals(price, dto.getPrice()));
     }
 
     @Test
@@ -77,32 +63,27 @@ class BeerOrderLineDtoTest {
         BigDecimal price = new BigDecimal("10.99");
 
         BeerOrderLineDto dto = BeerOrderLineDto.builder()
-                .id(id)
-                .version(version)
-                .createdDate(createdDate)
-                .lastModifiedDate(lastModifiedDate)
-                .beerId(beerId)
-                .upc(upc)
-                .beerName(beerName)
-                .beerStyle(beerStyle)
-                .orderQuantity(orderQuantity)
-                .quantityAllocated(quantityAllocated)
-                .price(price)
-                .build();
+            .id(id)
+            .version(version)
+            .createdDate(createdDate)
+            .lastModifiedDate(lastModifiedDate)
+            .beerId(beerId)
+            .upc(upc)
+            .beerName(beerName)
+            .beerStyle(beerStyle)
+            .orderQuantity(orderQuantity)
+            .quantityAllocated(quantityAllocated)
+            .price(price)
+            .build();
 
-        assertAll(
-            () -> assertEquals(id, dto.getId()),
-            () -> assertEquals(version, dto.getVersion()),
-            () -> assertEquals(createdDate, dto.getCreatedDate()),
-            () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
-            () -> assertEquals(beerId, dto.getBeerId()),
-            () -> assertEquals(upc, dto.getUpc()),
-            () -> assertEquals(beerName, dto.getBeerName()),
-            () -> assertEquals(beerStyle, dto.getBeerStyle()),
-            () -> assertEquals(orderQuantity, dto.getOrderQuantity()),
-            () -> assertEquals(quantityAllocated, dto.getQuantityAllocated()),
-            () -> assertEquals(price, dto.getPrice())
-        );
+        assertAll(() -> assertEquals(id, dto.getId()), () -> assertEquals(version, dto.getVersion()),
+                () -> assertEquals(createdDate, dto.getCreatedDate()),
+                () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
+                () -> assertEquals(beerId, dto.getBeerId()), () -> assertEquals(upc, dto.getUpc()),
+                () -> assertEquals(beerName, dto.getBeerName()), () -> assertEquals(beerStyle, dto.getBeerStyle()),
+                () -> assertEquals(orderQuantity, dto.getOrderQuantity()),
+                () -> assertEquals(quantityAllocated, dto.getQuantityAllocated()),
+                () -> assertEquals(price, dto.getPrice()));
     }
 
     @Test
@@ -158,30 +139,28 @@ class BeerOrderLineDtoTest {
     void testEqualsAndHashCode() {
         UUID id = UUID.randomUUID();
         UUID beerId = UUID.randomUUID();
-        
+
         BeerOrderLineDto dto1 = BeerOrderLineDto.builder()
-                .id(id)
-                .beerId(beerId)
-                .upc("12345")
-                .beerName("Test Beer")
-                .orderQuantity(10)
-                .build();
+            .id(id)
+            .beerId(beerId)
+            .upc("12345")
+            .beerName("Test Beer")
+            .orderQuantity(10)
+            .build();
 
         BeerOrderLineDto dto2 = BeerOrderLineDto.builder()
-                .id(id)
-                .beerId(beerId)
-                .upc("12345")
-                .beerName("Test Beer")
-                .orderQuantity(10)
-                .build();
+            .id(id)
+            .beerId(beerId)
+            .upc("12345")
+            .beerName("Test Beer")
+            .orderQuantity(10)
+            .build();
 
-        assertAll(
-            () -> assertEquals(dto1, dto2),
-            () -> assertEquals(dto1.hashCode(), dto2.hashCode())
-        );
+        assertAll(() -> assertEquals(dto1, dto2), () -> assertEquals(dto1.hashCode(), dto2.hashCode()));
 
         // Change a property to verify equals works correctly
         dto2.setOrderQuantity(20);
         assertNotEquals(dto1, dto2);
     }
+
 }

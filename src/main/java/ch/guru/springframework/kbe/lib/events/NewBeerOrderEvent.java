@@ -9,7 +9,8 @@ public class NewBeerOrderEvent extends ApplicationEvent {
         super(source);
     }
 
-    public BeerOrderDto getBeerOrder(){
+    public BeerOrderDto getBeerOrder() {
         return (BeerOrderDto) this.source;
     }
+
 }

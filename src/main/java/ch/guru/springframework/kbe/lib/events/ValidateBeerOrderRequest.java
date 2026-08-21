@@ -14,5 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ValidateBeerOrderRequest {
+
     private BeerOrderDto beerOrder;
+
 }

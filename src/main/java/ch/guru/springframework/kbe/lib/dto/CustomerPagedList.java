@@ -9,23 +9,17 @@ import tools.jackson.databind.JsonNode;
 
 import java.util.List;
 
-
 public class CustomerPagedList extends PageImpl<CustomerDto> {
-    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-    public CustomerPagedList(@JsonProperty("content") List<CustomerDto> content,
-                             @JsonProperty("number") Integer number,
-                             @JsonProperty("size") Integer size,
-                             @JsonProperty("totalElements") Long totalElements,
-                             @JsonProperty("pageable") JsonNode pageable,
-                             @JsonProperty("last") Boolean last,
-                             @JsonProperty("totalPages") Integer totalPages,
-                             @JsonProperty("sort") JsonNode sort,
-                             @JsonProperty("first") Boolean first,
-                             @JsonProperty("numberOfElements") Integer numberOfElements) {
 
-        super(content,
-            PageRequest.of(number != null ? number : 0, size != null ? size : 25),
-            totalElements != null ? totalElements : 0L);
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public CustomerPagedList(@JsonProperty("content") List<CustomerDto> content, @JsonProperty("number") Integer number,
+            @JsonProperty("size") Integer size, @JsonProperty("totalElements") Long totalElements,
+            @JsonProperty("pageable") JsonNode pageable, @JsonProperty("last") Boolean last,
+            @JsonProperty("totalPages") Integer totalPages, @JsonProperty("sort") JsonNode sort,
+            @JsonProperty("first") Boolean first, @JsonProperty("numberOfElements") Integer numberOfElements) {
+
+        super(content, PageRequest.of(number != null ? number : 0, size != null ? size : 25),
+                totalElements != null ? totalElements : 0L);
     }
 
     public CustomerPagedList(List<CustomerDto> content, Pageable pageable, long total) {
@@ -35,4 +29,5 @@ public class CustomerPagedList extends PageImpl<CustomerDto> {
     public CustomerPagedList(List<CustomerDto> content) {
         super(content, PageRequest.of(0, content.isEmpty() ? 1 : content.size()), content.size());
     }
+
 }

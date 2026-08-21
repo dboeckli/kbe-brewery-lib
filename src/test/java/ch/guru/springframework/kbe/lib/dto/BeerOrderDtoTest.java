@@ -15,17 +15,11 @@ class BeerOrderDtoTest {
     void testNoArgsConstructor() {
         BeerOrderDto dto = new BeerOrderDto();
 
-        assertAll(
-            () -> assertNull(dto.getId()),
-            () -> assertNull(dto.getVersion()),
-            () -> assertNull(dto.getCreatedDate()),
-            () -> assertNull(dto.getLastModifiedDate()),
-            () -> assertNull(dto.getCustomerId()),
-            () -> assertNull(dto.getCustomerRef()),
-            () -> assertNull(dto.getBeerOrderLines()),
-            () -> assertNull(dto.getOrderStatus()),
-            () -> assertNull(dto.getOrderStatusCallbackUrl())
-        );
+        assertAll(() -> assertNull(dto.getId()), () -> assertNull(dto.getVersion()),
+                () -> assertNull(dto.getCreatedDate()), () -> assertNull(dto.getLastModifiedDate()),
+                () -> assertNull(dto.getCustomerId()), () -> assertNull(dto.getCustomerRef()),
+                () -> assertNull(dto.getBeerOrderLines()), () -> assertNull(dto.getOrderStatus()),
+                () -> assertNull(dto.getOrderStatusCallbackUrl()));
     }
 
     @Test
@@ -40,21 +34,17 @@ class BeerOrderDtoTest {
         String orderStatus = "NEW";
         String orderStatusCallbackUrl = "http://example.com/callback";
 
-        BeerOrderDto dto = new BeerOrderDto(id, version, createdDate, lastModifiedDate, 
-                                           customerId, customerRef, beerOrderLines, 
-                                           orderStatus, orderStatusCallbackUrl);
+        BeerOrderDto dto = new BeerOrderDto(id, version, createdDate, lastModifiedDate, customerId, customerRef,
+                beerOrderLines, orderStatus, orderStatusCallbackUrl);
 
-        assertAll(
-            () -> assertEquals(id, dto.getId()),
-            () -> assertEquals(version, dto.getVersion()),
-            () -> assertEquals(createdDate, dto.getCreatedDate()),
-            () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
-            () -> assertEquals(customerId, dto.getCustomerId()),
-            () -> assertEquals(customerRef, dto.getCustomerRef()),
-            () -> assertEquals(beerOrderLines, dto.getBeerOrderLines()),
-            () -> assertEquals(orderStatus, dto.getOrderStatus()),
-            () -> assertEquals(orderStatusCallbackUrl, dto.getOrderStatusCallbackUrl())
-        );
+        assertAll(() -> assertEquals(id, dto.getId()), () -> assertEquals(version, dto.getVersion()),
+                () -> assertEquals(createdDate, dto.getCreatedDate()),
+                () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
+                () -> assertEquals(customerId, dto.getCustomerId()),
+                () -> assertEquals(customerRef, dto.getCustomerRef()),
+                () -> assertEquals(beerOrderLines, dto.getBeerOrderLines()),
+                () -> assertEquals(orderStatus, dto.getOrderStatus()),
+                () -> assertEquals(orderStatusCallbackUrl, dto.getOrderStatusCallbackUrl()));
     }
 
     @Test
@@ -70,28 +60,25 @@ class BeerOrderDtoTest {
         String orderStatusCallbackUrl = "http://example.com/callback";
 
         BeerOrderDto dto = BeerOrderDto.builder()
-                .id(id)
-                .version(version)
-                .createdDate(createdDate)
-                .lastModifiedDate(lastModifiedDate)
-                .customerId(customerId)
-                .customerRef(customerRef)
-                .beerOrderLines(beerOrderLines)
-                .orderStatus(orderStatus)
-                .orderStatusCallbackUrl(orderStatusCallbackUrl)
-                .build();
+            .id(id)
+            .version(version)
+            .createdDate(createdDate)
+            .lastModifiedDate(lastModifiedDate)
+            .customerId(customerId)
+            .customerRef(customerRef)
+            .beerOrderLines(beerOrderLines)
+            .orderStatus(orderStatus)
+            .orderStatusCallbackUrl(orderStatusCallbackUrl)
+            .build();
 
-        assertAll(
-            () -> assertEquals(id, dto.getId()),
-            () -> assertEquals(version, dto.getVersion()),
-            () -> assertEquals(createdDate, dto.getCreatedDate()),
-            () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
-            () -> assertEquals(customerId, dto.getCustomerId()),
-            () -> assertEquals(customerRef, dto.getCustomerRef()),
-            () -> assertEquals(beerOrderLines, dto.getBeerOrderLines()),
-            () -> assertEquals(orderStatus, dto.getOrderStatus()),
-            () -> assertEquals(orderStatusCallbackUrl, dto.getOrderStatusCallbackUrl())
-        );
+        assertAll(() -> assertEquals(id, dto.getId()), () -> assertEquals(version, dto.getVersion()),
+                () -> assertEquals(createdDate, dto.getCreatedDate()),
+                () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
+                () -> assertEquals(customerId, dto.getCustomerId()),
+                () -> assertEquals(customerRef, dto.getCustomerRef()),
+                () -> assertEquals(beerOrderLines, dto.getBeerOrderLines()),
+                () -> assertEquals(orderStatus, dto.getOrderStatus()),
+                () -> assertEquals(orderStatusCallbackUrl, dto.getOrderStatusCallbackUrl()));
     }
 
     @Test
@@ -139,28 +126,26 @@ class BeerOrderDtoTest {
     void testEqualsAndHashCode() {
         UUID id = UUID.randomUUID();
         UUID customerId = UUID.randomUUID();
-        
+
         BeerOrderDto dto1 = BeerOrderDto.builder()
-                .id(id)
-                .customerId(customerId)
-                .customerRef("Test Ref")
-                .orderStatus("NEW")
-                .build();
+            .id(id)
+            .customerId(customerId)
+            .customerRef("Test Ref")
+            .orderStatus("NEW")
+            .build();
 
         BeerOrderDto dto2 = BeerOrderDto.builder()
-                .id(id)
-                .customerId(customerId)
-                .customerRef("Test Ref")
-                .orderStatus("NEW")
-                .build();
+            .id(id)
+            .customerId(customerId)
+            .customerRef("Test Ref")
+            .orderStatus("NEW")
+            .build();
 
-        assertAll(
-            () -> assertEquals(dto1, dto2),
-            () -> assertEquals(dto1.hashCode(), dto2.hashCode())
-        );
+        assertAll(() -> assertEquals(dto1, dto2), () -> assertEquals(dto1.hashCode(), dto2.hashCode()));
 
         // Change a property to verify equals works correctly
         dto2.setOrderStatus("PENDING");
         assertNotEquals(dto1, dto2);
     }
+
 }

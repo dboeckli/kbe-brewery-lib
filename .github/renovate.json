@@ -19,11 +19,15 @@
     "enabledManagers": [
         "maven",
         "maven-wrapper",
-        "docker-compose",
-        "kubernetes",
-        "helm-values",
-        "helmv3",
         "custom.regex"
+    ],
+    "ignorePaths": [
+        "**/node_modules/**",
+        "**/bower_components/**",
+        "**/vendor/**",
+        "**/examples/**",
+        "**/__tests__/**",
+        "**/__fixtures__/**"
     ],
     "maven-wrapper": {
         "managerFilePatterns": [
@@ -32,25 +36,6 @@
             "/(^|/).mvn/wrapper/maven-wrapper.properties$/"
         ],
         "versioning": "maven"
-    },
-    "docker-compose": {
-        "enabled": true
-    },
-    "kubernetes": {
-        "managerFilePatterns": [
-            "/k8s/.+\\.ya?ml$/",
-            "/helm-charts/templates/.+\\.ya?ml$/"
-        ]
-    },
-    "helm-values": {
-        "managerFilePatterns": [
-            "/helm-charts/.+/values\\.ya?ml$/"
-        ]
-    },
-    "helmv3": {
-        "managerFilePatterns": [
-            "/(^|/)Chart\\.ya?ml$/"
-        ]
     },
     "packageRules": [
         {

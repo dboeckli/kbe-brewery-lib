@@ -5,7 +5,8 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>4.1.1</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <relativePath />
+        <!-- lookup parent from repository -->
     </parent>
 
     <!-- artifacId should be lowercase to be able to push to github packages -->
@@ -13,7 +14,7 @@
     <artifactId>kbe-brewery-lib</artifactId>
     <version>0.0.7-SNAPSHOT</version>
     <packaging>jar</packaging>
-    
+
     <name>${project.artifactId}</name>
     <description>This is a library only project for kbe-brewery-lib</description>
 
@@ -24,9 +25,17 @@
     <scm>
         <connection>scm:git:https://github.com/${project.organization.name}/${project.artifactId}.git</connection>
         <developerConnection>scm:git:https://github.com/${project.organization.name}/${project.artifactId}.git</developerConnection>
-        <url>https://github.com/${project.organization.name}/${project.artifactId}.git</url>
         <tag>HEAD</tag>
+        <url>https://github.com/${project.organization.name}/${project.artifactId}.git</url>
     </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub dboeckli Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/${project.organization.name}/${project.artifactId}</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <java.version>25</java.version>
@@ -35,6 +44,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <editorconfig-maven-plugin.version>0.2.0</editorconfig-maven-plugin.version>
+        <spotless-maven-plugin.version>3.10.0</spotless-maven-plugin.version>
 
         <!-- Sonar -->
         <sonar-maven-plugin.version>5.7.0.6970</sonar-maven-plugin.version>
@@ -43,52 +53,6 @@
         <sonar.language>java</sonar.language>
         <jacoco.version>0.8.15</jacoco.version>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>https://repo1.maven.org/maven2</url>
-        </repository>
-        <repository>
-            <!--
-            you need a personal access token for the dboeckli organization: generate access token on github: https://github.com/settings/apps
-            add gitHub server configuration to settings.xml file with username and password (add token there)
-            Configure maven settings of IntelliJ to use your personal settings.xml
-            -->
-            <id>github</id>
-            <url>https://maven.pkg.github.com/${project.organization.name}/${project.artifactId}</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <profiles>
-        <profile>
-            <id>github</id>
-            <repositories>
-                <repository>
-                    <id>central</id>
-                    <url>https://repo1.maven.org/maven2</url>
-                </repository>
-                <repository>
-                    <id>github</id>
-                    <url>https://maven.pkg.github.com/${project.organization.name}/${project.artifactId}</url>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-        </profile>
-    </profiles>
-    
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub dboeckli Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/${project.organization.name}/${project.artifactId}</url>
-        </repository>
-    </distributionManagement>
 
     <dependencies>
 
@@ -135,6 +99,25 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <!--
+            you need a personal access token for the dboeckli organization: generate access token on github: https://github.com/settings/apps
+            add gitHub server configuration to settings.xml file with username and password (add token there)
+            Configure maven settings of IntelliJ to use your personal settings.xml
+            -->
+            <id>github</id>
+            <url>https://maven.pkg.github.com/${project.organization.name}/${project.artifactId}</url>
+        </repository>
+    </repositories>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -173,21 +156,12 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-        
+
         <plugins>
             <plugin>
                 <groupId>org.ec4j.maven</groupId>
                 <artifactId>editorconfig-maven-plugin</artifactId>
                 <version>${editorconfig-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>check-with-editorconfig</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
                     <!-- See http://ec4j.github.io/editorconfig-maven-plugin/ for full configuration reference -->
                     <excludes>
@@ -204,6 +178,90 @@
                         <exclude>mvnw.cmd</exclude>
                     </excludes>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>check-with-editorconfig</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>${spotless-maven-plugin.version}</version>
+                <configuration>
+                    <pom>
+                        <includes>
+                            <include>pom.xml</include>
+                        </includes>
+                        <excludes>
+                            <exclude>target/**</exclude>
+                            <exclude>**/node_modules/**</exclude>
+                        </excludes>
+                        <sortPom>
+                            <!-- to avoid conflicts with release maven plugin -->
+                            <spaceBeforeCloseEmptyElement>true</spaceBeforeCloseEmptyElement>
+                            <!-- keep the project's 4-space indentation (editorconfig) -->
+                            <nrOfIndentSpace>4</nrOfIndentSpace>
+                        </sortPom>
+                    </pom>
+                    <markdown>
+                        <includes>
+                            <include>**/*.md</include>
+                        </includes>
+                        <excludes>
+                            <exclude>AGENTS.md</exclude>
+                            <exclude>CLAUDE.md</exclude>
+                            <exclude>target/**</exclude>
+                            <exclude>**/node_modules/**</exclude>
+                        </excludes>
+                        <flexmark />
+                    </markdown>
+                    <json>
+                        <includes>
+                            <include>**/*.json</include>
+                        </includes>
+                        <excludes>
+                            <exclude>target/**</exclude>
+                            <exclude>**/node_modules/**</exclude>
+                            <exclude>.github/**</exclude>
+                            <exclude>.idea/**</exclude>
+                        </excludes>
+                        <prettier />
+                    </json>
+                    <yaml>
+                        <includes>
+                            <include>src/main/resources/application*.yaml</include>
+                            <include>src/main/resources/application*.yml</include>
+                        </includes>
+                        <prettier />
+                    </yaml>
+                    <shell>
+                        <includes>
+                            <include>**/*.sh</include>
+                        </includes>
+                        <excludes>
+                            <exclude>target/**</exclude>
+                            <exclude>**/node_modules/**</exclude>
+                        </excludes>
+                        <shfmt>
+                            <version>3.13.1</version>
+                        </shfmt>
+                    </shell>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>enforce-format</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -235,10 +293,10 @@
                 <executions>
                     <execution>
                         <id>attach-sources</id>
-                        <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                        <phase>package</phase>
                     </execution>
                 </executions>
             </plugin>
@@ -251,10 +309,10 @@
                 <executions>
                     <execution>
                         <id>create-bill-of-materials</id>
-                        <phase>package</phase>
                         <goals>
                             <goal>makeBom</goal>
                         </goals>
+                        <phase>package</phase>
                     </execution>
                 </executions>
             </plugin>
@@ -274,7 +332,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -315,7 +373,8 @@
                             <formats>
                                 <format>XML</format>
                             </formats>
-                            <outputDirectory>target/site/jacoco</outputDirectory> <!-- default -->
+                            <outputDirectory>target/site/jacoco</outputDirectory>
+                            <!-- default -->
                         </configuration>
                     </execution>
                 </executions>
@@ -341,6 +400,14 @@
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
+                <configuration>
+                    <verbose>true</verbose>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                    <commitIdGenerationMode>full</commitIdGenerationMode>
+                    <runOnlyOnce>true</runOnlyOnce>
+                    <skipPoms>false</skipPoms>
+                </configuration>
                 <executions>
                     <execution>
                         <id>get-the-git-infos</id>
@@ -350,15 +417,26 @@
                         <phase>initialize</phase>
                     </execution>
                 </executions>
-                <configuration>
-                    <verbose>true</verbose>
-                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
-                    <commitIdGenerationMode>full</commitIdGenerationMode>
-                    <runOnlyOnce>true</runOnlyOnce>
-                    <skipPoms>false</skipPoms>
-                </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>github</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                </repository>
+                <repository>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/${project.organization.name}/${project.artifactId}</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
 </project>

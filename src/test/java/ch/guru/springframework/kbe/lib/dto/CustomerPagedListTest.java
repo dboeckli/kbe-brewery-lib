@@ -24,11 +24,9 @@ class CustomerPagedListTest {
 
         CustomerPagedList deserializedPagedList = objectMapper.readValue(json, CustomerPagedList.class);
 
-        assertAll("CustomerPagedList Deserialization with PageRequest",
-            () -> assertNotNull(deserializedPagedList),
-            () -> assertEquals(1, deserializedPagedList.getContent().size()),
-            () -> assertEquals(CustomerDto.getId(), deserializedPagedList.getContent().getFirst().getId())
-        );
+        assertAll("CustomerPagedList Deserialization with PageRequest", () -> assertNotNull(deserializedPagedList),
+                () -> assertEquals(1, deserializedPagedList.getContent().size()),
+                () -> assertEquals(CustomerDto.getId(), deserializedPagedList.getContent().getFirst().getId()));
     }
 
     @Test
@@ -42,11 +40,9 @@ class CustomerPagedListTest {
 
         CustomerPagedList deserializedPagedList = objectMapper.readValue(json, CustomerPagedList.class);
 
-        assertAll("CustomerPagedList Deserialization Unpaged",
-            () -> assertNotNull(deserializedPagedList),
-            () -> assertEquals(1, deserializedPagedList.getContent().size()),
-            () -> assertEquals(CustomerDto.getId(), deserializedPagedList.getContent().getFirst().getId())
-        );
+        assertAll("CustomerPagedList Deserialization Unpaged", () -> assertNotNull(deserializedPagedList),
+                () -> assertEquals(1, deserializedPagedList.getContent().size()),
+                () -> assertEquals(CustomerDto.getId(), deserializedPagedList.getContent().getFirst().getId()));
     }
 
     private CustomerDto createCustomerDto() {

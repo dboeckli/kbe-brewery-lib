@@ -44,11 +44,12 @@ class BrewBeerEventTest {
 
     private BeerDto createSampleBeerDto() {
         return BeerDto.builder()
-                .id(UUID.randomUUID())
-                .beerName("Test Beer")
-                .beerStyle(BeerStyleEnum.ALE)
-                .upc("12345")
-                .price(new BigDecimal("10.99"))
-                .build();
+            .id(UUID.randomUUID())
+            .beerName("Test Beer")
+            .beerStyle(BeerStyleEnum.ALE)
+            .upc("12345")
+            .price(new BigDecimal("10.99"))
+            .build();
     }
+
 }

@@ -13,13 +13,9 @@ class BeerInventoryDtoTest {
     void testNoArgsConstructor() {
         BeerInventoryDto dto = new BeerInventoryDto();
 
-        assertAll(
-            () -> assertNull(dto.getId()),
-            () -> assertNull(dto.getCreatedDate()),
-            () -> assertNull(dto.getLastModifiedDate()),
-            () -> assertNull(dto.getBeerId()),
-            () -> assertNull(dto.getQuantityOnHand())
-        );
+        assertAll(() -> assertNull(dto.getId()), () -> assertNull(dto.getCreatedDate()),
+                () -> assertNull(dto.getLastModifiedDate()), () -> assertNull(dto.getBeerId()),
+                () -> assertNull(dto.getQuantityOnHand()));
     }
 
     @Test
@@ -32,13 +28,10 @@ class BeerInventoryDtoTest {
 
         BeerInventoryDto dto = new BeerInventoryDto(id, createdDate, lastModifiedDate, beerId, quantityOnHand);
 
-        assertAll(
-            () -> assertEquals(id, dto.getId()),
-            () -> assertEquals(createdDate, dto.getCreatedDate()),
-            () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
-            () -> assertEquals(beerId, dto.getBeerId()),
-            () -> assertEquals(quantityOnHand, dto.getQuantityOnHand())
-        );
+        assertAll(() -> assertEquals(id, dto.getId()), () -> assertEquals(createdDate, dto.getCreatedDate()),
+                () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
+                () -> assertEquals(beerId, dto.getBeerId()),
+                () -> assertEquals(quantityOnHand, dto.getQuantityOnHand()));
     }
 
     @Test
@@ -50,20 +43,17 @@ class BeerInventoryDtoTest {
         Integer quantityOnHand = 10;
 
         BeerInventoryDto dto = BeerInventoryDto.builder()
-                .id(id)
-                .createdDate(createdDate)
-                .lastModifiedDate(lastModifiedDate)
-                .beerId(beerId)
-                .quantityOnHand(quantityOnHand)
-                .build();
+            .id(id)
+            .createdDate(createdDate)
+            .lastModifiedDate(lastModifiedDate)
+            .beerId(beerId)
+            .quantityOnHand(quantityOnHand)
+            .build();
 
-        assertAll(
-            () -> assertEquals(id, dto.getId()),
-            () -> assertEquals(createdDate, dto.getCreatedDate()),
-            () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
-            () -> assertEquals(beerId, dto.getBeerId()),
-            () -> assertEquals(quantityOnHand, dto.getQuantityOnHand())
-        );
+        assertAll(() -> assertEquals(id, dto.getId()), () -> assertEquals(createdDate, dto.getCreatedDate()),
+                () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
+                () -> assertEquals(beerId, dto.getBeerId()),
+                () -> assertEquals(quantityOnHand, dto.getQuantityOnHand()));
     }
 
     @Test
@@ -96,25 +86,15 @@ class BeerInventoryDtoTest {
         UUID id = UUID.randomUUID();
         UUID beerId = UUID.randomUUID();
 
-        BeerInventoryDto dto1 = BeerInventoryDto.builder()
-                .id(id)
-                .beerId(beerId)
-                .quantityOnHand(10)
-                .build();
+        BeerInventoryDto dto1 = BeerInventoryDto.builder().id(id).beerId(beerId).quantityOnHand(10).build();
 
-        BeerInventoryDto dto2 = BeerInventoryDto.builder()
-                .id(id)
-                .beerId(beerId)
-                .quantityOnHand(10)
-                .build();
+        BeerInventoryDto dto2 = BeerInventoryDto.builder().id(id).beerId(beerId).quantityOnHand(10).build();
 
-        assertAll(
-            () -> assertEquals(dto1, dto2),
-            () -> assertEquals(dto1.hashCode(), dto2.hashCode())
-        );
+        assertAll(() -> assertEquals(dto1, dto2), () -> assertEquals(dto1.hashCode(), dto2.hashCode()));
 
         // Change a property to verify equals works correctly
         dto2.setQuantityOnHand(20);
         assertNotEquals(dto1, dto2);
     }
+
 }

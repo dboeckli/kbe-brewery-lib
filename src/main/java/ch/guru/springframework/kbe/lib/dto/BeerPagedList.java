@@ -27,21 +27,16 @@ import tools.jackson.databind.JsonNode;
 import java.util.List;
 
 public class BeerPagedList extends PageImpl<BeerDto> {
-    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-    public BeerPagedList(@JsonProperty("content") List<BeerDto> content,
-                         @JsonProperty("number") Integer number,
-                         @JsonProperty("size") Integer size,
-                         @JsonProperty("totalElements") Long totalElements,
-                         @JsonProperty("pageable") JsonNode pageable,
-                         @JsonProperty("last") Boolean last,
-                         @JsonProperty("totalPages") Integer totalPages,
-                         @JsonProperty("sort") JsonNode sort,
-                         @JsonProperty("first") Boolean first,
-                         @JsonProperty("numberOfElements") Integer numberOfElements) {
 
-        super(content,
-            PageRequest.of(number != null ? number : 0, size != null ? size : 25),
-            totalElements != null ? totalElements : 0L);
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public BeerPagedList(@JsonProperty("content") List<BeerDto> content, @JsonProperty("number") Integer number,
+            @JsonProperty("size") Integer size, @JsonProperty("totalElements") Long totalElements,
+            @JsonProperty("pageable") JsonNode pageable, @JsonProperty("last") Boolean last,
+            @JsonProperty("totalPages") Integer totalPages, @JsonProperty("sort") JsonNode sort,
+            @JsonProperty("first") Boolean first, @JsonProperty("numberOfElements") Integer numberOfElements) {
+
+        super(content, PageRequest.of(number != null ? number : 0, size != null ? size : 25),
+                totalElements != null ? totalElements : 0L);
     }
 
     public BeerPagedList(List<BeerDto> content, Pageable pageable, long total) {

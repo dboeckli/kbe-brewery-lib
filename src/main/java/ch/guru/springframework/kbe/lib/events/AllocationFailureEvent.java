@@ -12,5 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class AllocationFailureEvent {
+
     private UUID beerOrderId;
+
 }

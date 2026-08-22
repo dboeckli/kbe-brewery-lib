@@ -13,13 +13,9 @@ class CustomerDtoTest {
     void testNoArgsConstructor() {
         CustomerDto dto = new CustomerDto();
 
-        assertAll(
-            () -> assertNull(dto.getId()),
-            () -> assertNull(dto.getVersion()),
-            () -> assertNull(dto.getCreatedDate()),
-            () -> assertNull(dto.getLastModifiedDate()),
-            () -> assertNull(dto.getCustomerName())
-        );
+        assertAll(() -> assertNull(dto.getId()), () -> assertNull(dto.getVersion()),
+                () -> assertNull(dto.getCreatedDate()), () -> assertNull(dto.getLastModifiedDate()),
+                () -> assertNull(dto.getCustomerName()));
     }
 
     @Test
@@ -32,13 +28,10 @@ class CustomerDtoTest {
 
         CustomerDto dto = new CustomerDto(id, version, createdDate, lastModifiedDate, customerName);
 
-        assertAll(
-            () -> assertEquals(id, dto.getId()),
-            () -> assertEquals(version, dto.getVersion()),
-            () -> assertEquals(createdDate, dto.getCreatedDate()),
-            () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
-            () -> assertEquals(customerName, dto.getCustomerName())
-        );
+        assertAll(() -> assertEquals(id, dto.getId()), () -> assertEquals(version, dto.getVersion()),
+                () -> assertEquals(createdDate, dto.getCreatedDate()),
+                () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
+                () -> assertEquals(customerName, dto.getCustomerName()));
     }
 
     @Test
@@ -50,20 +43,17 @@ class CustomerDtoTest {
         String customerName = "Test Customer";
 
         CustomerDto dto = CustomerDto.builder()
-                .id(id)
-                .version(version)
-                .createdDate(createdDate)
-                .lastModifiedDate(lastModifiedDate)
-                .customerName(customerName)
-                .build();
+            .id(id)
+            .version(version)
+            .createdDate(createdDate)
+            .lastModifiedDate(lastModifiedDate)
+            .customerName(customerName)
+            .build();
 
-        assertAll(
-            () -> assertEquals(id, dto.getId()),
-            () -> assertEquals(version, dto.getVersion()),
-            () -> assertEquals(createdDate, dto.getCreatedDate()),
-            () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
-            () -> assertEquals(customerName, dto.getCustomerName())
-        );
+        assertAll(() -> assertEquals(id, dto.getId()), () -> assertEquals(version, dto.getVersion()),
+                () -> assertEquals(createdDate, dto.getCreatedDate()),
+                () -> assertEquals(lastModifiedDate, dto.getLastModifiedDate()),
+                () -> assertEquals(customerName, dto.getCustomerName()));
     }
 
     @Test
@@ -94,24 +84,16 @@ class CustomerDtoTest {
     @Test
     void testEqualsAndHashCode() {
         UUID id = UUID.randomUUID();
-        
-        CustomerDto dto1 = CustomerDto.builder()
-                .id(id)
-                .customerName("Test Customer")
-                .build();
 
-        CustomerDto dto2 = CustomerDto.builder()
-                .id(id)
-                .customerName("Test Customer")
-                .build();
+        CustomerDto dto1 = CustomerDto.builder().id(id).customerName("Test Customer").build();
 
-        assertAll(
-            () -> assertEquals(dto1, dto2),
-            () -> assertEquals(dto1.hashCode(), dto2.hashCode())
-        );
+        CustomerDto dto2 = CustomerDto.builder().id(id).customerName("Test Customer").build();
+
+        assertAll(() -> assertEquals(dto1, dto2), () -> assertEquals(dto1.hashCode(), dto2.hashCode()));
 
         // Change a property to verify equals works correctly
         dto2.setCustomerName("Different Customer");
         assertNotEquals(dto1, dto2);
     }
+
 }

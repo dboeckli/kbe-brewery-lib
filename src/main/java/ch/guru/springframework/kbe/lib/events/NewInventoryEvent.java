@@ -15,4 +15,5 @@ public class NewInventoryEvent extends BeerEvent implements Serializable {
     public NewInventoryEvent(BeerDto beerDto) {
         super(beerDto);
     }
+
 }

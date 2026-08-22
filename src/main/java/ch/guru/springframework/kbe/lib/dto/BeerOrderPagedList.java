@@ -27,21 +27,17 @@ import tools.jackson.databind.JsonNode;
 import java.util.List;
 
 public class BeerOrderPagedList extends PageImpl<BeerOrderDto> {
+
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public BeerOrderPagedList(@JsonProperty("content") List<BeerOrderDto> content,
-                              @JsonProperty("number") Integer number,
-                              @JsonProperty("size") Integer size,
-                              @JsonProperty("totalElements") Long totalElements,
-                              @JsonProperty("pageable") JsonNode pageable,
-                              @JsonProperty("last") Boolean last,
-                              @JsonProperty("totalPages") Integer totalPages,
-                              @JsonProperty("sort") JsonNode sort,
-                              @JsonProperty("first") Boolean first,
-                              @JsonProperty("numberOfElements") Integer numberOfElements) {
+            @JsonProperty("number") Integer number, @JsonProperty("size") Integer size,
+            @JsonProperty("totalElements") Long totalElements, @JsonProperty("pageable") JsonNode pageable,
+            @JsonProperty("last") Boolean last, @JsonProperty("totalPages") Integer totalPages,
+            @JsonProperty("sort") JsonNode sort, @JsonProperty("first") Boolean first,
+            @JsonProperty("numberOfElements") Integer numberOfElements) {
 
-        super(content,
-            PageRequest.of(number != null ? number : 0, size != null ? size : 25),
-            totalElements != null ? totalElements : 0L);
+        super(content, PageRequest.of(number != null ? number : 0, size != null ? size : 25),
+                totalElements != null ? totalElements : 0L);
     }
 
     public BeerOrderPagedList(List<BeerOrderDto> content, Pageable pageable, long total) {
@@ -51,4 +47,5 @@ public class BeerOrderPagedList extends PageImpl<BeerOrderDto> {
     public BeerOrderPagedList(List<BeerOrderDto> content) {
         super(content, PageRequest.of(0, content.isEmpty() ? 1 : content.size()), content.size());
     }
+
 }

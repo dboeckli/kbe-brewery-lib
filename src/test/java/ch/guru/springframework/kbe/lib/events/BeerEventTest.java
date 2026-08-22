@@ -31,9 +31,7 @@ class BeerEventTest {
     void testBuilder() {
         BeerDto beerDto = createSampleBeerDto();
 
-        BeerEvent beerEvent = BeerEvent.builder()
-                .beerDto(beerDto)
-                .build();
+        BeerEvent beerEvent = BeerEvent.builder().beerDto(beerDto).build();
 
         assertEquals(beerDto, beerEvent.getBeerDto());
     }
@@ -52,18 +50,12 @@ class BeerEventTest {
     void testEqualsAndHashCode() {
         BeerDto beerDto = createSampleBeerDto();
 
-        BeerEvent beerEvent1 = BeerEvent.builder()
-                .beerDto(beerDto)
-                .build();
+        BeerEvent beerEvent1 = BeerEvent.builder().beerDto(beerDto).build();
 
-        BeerEvent beerEvent2 = BeerEvent.builder()
-                .beerDto(beerDto)
-                .build();
+        BeerEvent beerEvent2 = BeerEvent.builder().beerDto(beerDto).build();
 
-        assertAll(
-            () -> assertEquals(beerEvent1, beerEvent2),
-            () -> assertEquals(beerEvent1.hashCode(), beerEvent2.hashCode())
-        );
+        assertAll(() -> assertEquals(beerEvent1, beerEvent2),
+                () -> assertEquals(beerEvent1.hashCode(), beerEvent2.hashCode()));
 
         // Change a property to verify equals works correctly
         BeerDto differentBeerDto = createSampleBeerDto();
@@ -75,11 +67,12 @@ class BeerEventTest {
 
     private BeerDto createSampleBeerDto() {
         return BeerDto.builder()
-                .id(UUID.randomUUID())
-                .beerName("Test Beer")
-                .beerStyle(BeerStyleEnum.ALE)
-                .upc("12345")
-                .price(new BigDecimal("10.99"))
-                .build();
+            .id(UUID.randomUUID())
+            .beerName("Test Beer")
+            .beerStyle(BeerStyleEnum.ALE)
+            .upc("12345")
+            .price(new BigDecimal("10.99"))
+            .build();
     }
+
 }

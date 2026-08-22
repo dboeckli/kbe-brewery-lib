@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,4 +13,5 @@ import lombok.NoArgsConstructor;
 public class BeerEvent {
 
     private BeerDto beerDto;
+
 }

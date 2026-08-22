@@ -25,15 +25,13 @@ class BeerPagedListTest {
 
         BeerPagedList deserializedPagedList = objectMapper.readValue(json, BeerPagedList.class);
 
-        assertAll("BeerPagedList Deserialization with PageRequest",
-            () -> assertNotNull(deserializedPagedList),
-            () -> assertEquals(1, deserializedPagedList.getContent().size()),
-            () -> assertEquals(beerDto.getId(), deserializedPagedList.getContent().getFirst().getId())
-        );
+        assertAll("BeerPagedList Deserialization with PageRequest", () -> assertNotNull(deserializedPagedList),
+                () -> assertEquals(1, deserializedPagedList.getContent().size()),
+                () -> assertEquals(beerDto.getId(), deserializedPagedList.getContent().getFirst().getId()));
     }
 
     @Test
-    void testSerializeDeserializeUnpaged()  {
+    void testSerializeDeserializeUnpaged() {
         BeerDto beerDto = createBeerDto();
 
         // Default constructor uses Unpaged internally if not modified
@@ -43,11 +41,9 @@ class BeerPagedListTest {
 
         BeerPagedList deserializedPagedList = objectMapper.readValue(json, BeerPagedList.class);
 
-        assertAll("BeerPagedList Deserialization Unpaged",
-            () -> assertNotNull(deserializedPagedList),
-            () -> assertEquals(1, deserializedPagedList.getContent().size()),
-            () -> assertEquals(beerDto.getId(), deserializedPagedList.getContent().getFirst().getId())
-        );
+        assertAll("BeerPagedList Deserialization Unpaged", () -> assertNotNull(deserializedPagedList),
+                () -> assertEquals(1, deserializedPagedList.getContent().size()),
+                () -> assertEquals(beerDto.getId(), deserializedPagedList.getContent().getFirst().getId()));
     }
 
     private BeerDto createBeerDto() {

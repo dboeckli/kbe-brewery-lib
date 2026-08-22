@@ -18,5 +18,7 @@
 package ch.guru.springframework.kbe.lib.dto;
 
 public enum BeerStyleEnum {
+
     LAGER, PILSNER, STOUT, GOSE, PORTER, ALE, WHEAT, IPA, PALE_ALE, SAISON
+
 }

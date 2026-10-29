@@ -46,6 +46,27 @@ class BeerPagedListTest {
                 () -> assertEquals(beerDto.getId(), deserializedPagedList.getContent().getFirst().getId()));
     }
 
+    @Test
+    void testJsonCreatorWithNullDefaults() {
+        BeerDto beerDto = createBeerDto();
+
+        BeerPagedList pagedList = new BeerPagedList(List.of(beerDto), null, null, null, null, null, null, null, null,
+                null);
+
+        assertAll("BeerPagedList JsonCreator null defaults", () -> assertEquals(1, pagedList.getContent().size()),
+                () -> assertEquals(0, pagedList.getNumber()), () -> assertEquals(25, pagedList.getSize()),
+                () -> assertEquals(1L, pagedList.getTotalElements()));
+    }
+
+    @Test
+    void testConstructorWithEmptyContent() {
+        BeerPagedList pagedList = new BeerPagedList(List.of());
+
+        assertAll("BeerPagedList empty content", () -> assertTrue(pagedList.getContent().isEmpty()),
+                () -> assertEquals(0, pagedList.getNumber()), () -> assertEquals(1, pagedList.getSize()),
+                () -> assertEquals(0L, pagedList.getTotalElements()));
+    }
+
     private BeerDto createBeerDto() {
         return BeerDto.builder()
             .id(UUID.randomUUID())

@@ -16,9 +16,9 @@ class BeerOrderPagedListTest {
 
     @Test
     void testSerializeDeserializeWithPageRequest() {
-        BeerOrderDto BeerOrderDto = createBeerOrderDto();
+        BeerOrderDto beerOrderDto = createBeerOrderDto();
 
-        BeerOrderPagedList pagedList = new BeerOrderPagedList(List.of(BeerOrderDto), PageRequest.of(1, 1), 1L);
+        BeerOrderPagedList pagedList = new BeerOrderPagedList(List.of(beerOrderDto), PageRequest.of(1, 1), 1L);
 
         String json = objectMapper.writeValueAsString(pagedList);
 
@@ -26,15 +26,15 @@ class BeerOrderPagedListTest {
 
         assertAll("BeerOrderPagedList Deserialization with PageRequest", () -> assertNotNull(deserializedPagedList),
                 () -> assertEquals(1, deserializedPagedList.getContent().size()),
-                () -> assertEquals(BeerOrderDto.getId(), deserializedPagedList.getContent().getFirst().getId()));
+                () -> assertEquals(beerOrderDto.getId(), deserializedPagedList.getContent().getFirst().getId()));
     }
 
     @Test
     void testSerializeDeserializeUnpaged() {
-        BeerOrderDto BeerOrderDto = createBeerOrderDto();
+        BeerOrderDto beerOrderDto = createBeerOrderDto();
 
         // Default constructor uses Unpaged internally if not modified
-        BeerOrderPagedList pagedList = new BeerOrderPagedList(List.of(BeerOrderDto));
+        BeerOrderPagedList pagedList = new BeerOrderPagedList(List.of(beerOrderDto));
 
         String json = objectMapper.writeValueAsString(pagedList);
 
@@ -42,7 +42,7 @@ class BeerOrderPagedListTest {
 
         assertAll("BeerOrderPagedList Deserialization Unpaged", () -> assertNotNull(deserializedPagedList),
                 () -> assertEquals(1, deserializedPagedList.getContent().size()),
-                () -> assertEquals(BeerOrderDto.getId(), deserializedPagedList.getContent().getFirst().getId()));
+                () -> assertEquals(beerOrderDto.getId(), deserializedPagedList.getContent().getFirst().getId()));
     }
 
     private BeerOrderDto createBeerOrderDto() {

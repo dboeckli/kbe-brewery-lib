@@ -45,6 +45,27 @@ class CustomerPagedListTest {
                 () -> assertEquals(customerDto.getId(), deserializedPagedList.getContent().getFirst().getId()));
     }
 
+    @Test
+    void testJsonCreatorWithNullDefaults() {
+        CustomerDto customerDto = createCustomerDto();
+
+        CustomerPagedList pagedList = new CustomerPagedList(List.of(customerDto), null, null, null, null, null, null,
+                null, null, null);
+
+        assertAll("CustomerPagedList JsonCreator null defaults", () -> assertEquals(1, pagedList.getContent().size()),
+                () -> assertEquals(0, pagedList.getNumber()), () -> assertEquals(25, pagedList.getSize()),
+                () -> assertEquals(1L, pagedList.getTotalElements()));
+    }
+
+    @Test
+    void testConstructorWithEmptyContent() {
+        CustomerPagedList pagedList = new CustomerPagedList(List.of());
+
+        assertAll("CustomerPagedList empty content", () -> assertTrue(pagedList.getContent().isEmpty()),
+                () -> assertEquals(0, pagedList.getNumber()), () -> assertEquals(1, pagedList.getSize()),
+                () -> assertEquals(0L, pagedList.getTotalElements()));
+    }
+
     private CustomerDto createCustomerDto() {
         return CustomerDto.builder()
             .id(UUID.randomUUID())
